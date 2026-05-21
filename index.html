@@ -47,7 +47,7 @@
       --cond:'Barlow Condensed',sans-serif;
       --body:'Barlow',sans-serif;
     }
-    html{scroll-behavior:auto}
+    html{scroll-behavior:auto;overscroll-behavior:none}
     body{background:var(--bg);color:var(--text);font-family:var(--body);font-weight:300;line-height:1.6;overflow-x:hidden;background-image:radial-gradient(ellipse 80% 50% at 50% -10%,rgba(200,212,220,0.05) 0%,transparent 70%)}
     a,button,[onclick]{touch-action:manipulation;-webkit-tap-highlight-color:transparent}
     ::selection{background:var(--accent);color:#000}
@@ -84,7 +84,7 @@
     .mob-menu .mob-book{padding:14px 36px;background:var(--accent);color:#05070b;font-size:12px!important;border-radius:999px}
 
     /* ══ HERO VIDEO ══ */
-    .hero{position:relative;height:calc(var(--vh,1vh)*100 - var(--nav-h));min-height:560px;overflow:hidden;margin-top:var(--nav-h);background:#020406;display:flex;align-items:flex-end}
+    .hero{position:relative;height:calc(var(--vh,1vh)*100 - var(--nav-h));min-height:560px;overflow:hidden;margin-top:var(--nav-h);background:#020406;display:flex;align-items:flex-end;-webkit-overflow-scrolling:touch}
     .hero-vid-bg{position:absolute;inset:0;z-index:1}
     .hero-vid-bg video{width:100%;height:100%;object-fit:cover;object-position:center 35%}
     .hero-vid-overlay{position:absolute;inset:0;z-index:2;background:linear-gradient(160deg,rgba(0,0,0,0.75) 0%,rgba(0,0,0,0.25) 50%,rgba(0,0,0,0.6) 100%)}
@@ -116,17 +116,7 @@
 
 
     /* ══ VIDEO SECTION ══ */
-    .vid-section{position:relative;height:610px;overflow:hidden;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#0a0f18 0%,#070c12 60%,#0c1018 100%)}
-    .vid-bg{position:absolute;inset:0;z-index:1}
-    .vid-bg video{width:100%;height:100%;object-fit:cover;object-position:center 60%;transform:translateZ(0);backface-visibility:hidden}
-    .vid-overlay{position:absolute;inset:0;z-index:2;background:linear-gradient(100deg,rgba(5,7,11,0.88) 0%,rgba(5,7,11,0.5) 45%,rgba(5,7,11,0.2) 100%)}
-    .vid-content{position:relative;z-index:3;padding:0 40px;max-width:760px;text-align:center}
-    .vid-eyebrow{font-family:var(--cond);font-size:11px;font-weight:700;letter-spacing:5px;text-transform:uppercase;color:var(--accent);margin-bottom:20px;display:flex;align-items:center;justify-content:center;gap:12px}
-    .vid-eyebrow::before,.vid-eyebrow::after{content:'';width:24px;height:1px;background:var(--accent)}
-    .vid-title{font-family:var(--raleway);font-weight:900;font-size:clamp(3rem,6vw,6rem);line-height:.88;text-transform:uppercase;letter-spacing:-2px;color:#fff;margin-bottom:20px}
-    .vid-title em{font-style:normal;background:linear-gradient(135deg,#a0aeb8 0%,#dde4ea 35%,#f0f4f6 52%,#dde4ea 68%,#a0aeb8 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;background-size:200% auto}
-    .vid-sub{font-family:var(--cond);font-size:12px;letter-spacing:4px;text-transform:uppercase;color:rgba(255,255,255,0.35)}
-    @media(max-width:880px){.vid-section{height:487px;align-items:center}.vid-content{padding:0 24px;text-align:center}.vid-title{font-size:clamp(2.4rem,10vw,4rem)}}
+    @media(max-width:880px){}
 
     /* ══ PILLAR STRIP ══ */
     .strip{display:grid;grid-template-columns:repeat(4,1fr);height:400px}
@@ -526,20 +516,20 @@
 
 
   </div><!-- /why-section-wrap -->
-  <!-- VIDEO SECTION -->
-  <div class="vid-section">
-    <div class="vid-bg">
-      <video muted loop playsinline preload="metadata" id="midVid">
-        <source src="Images/VideoProject3.mp4" type="video/mp4"/>
-      </video>
-    </div>
-    <div class="vid-overlay"></div>
-    <div class="vid-content">
-      <div class="vid-eyebrow">Watch Us Work</div>
-      <h2 class="vid-title">Every Detail.<br><em>Done Right.</em></h2>
-      <p class="vid-sub">Mobile detailing &mdash; San Diego, CA</p>
+  <!-- PHOTO BAND — replaced video section for performance ──>
+  <div style="position:relative;height:520px;overflow:hidden">
+    <img src="Images/640443902_17871821481546364_6731067578379859367_n.jpg"
+         alt="Aeroshine mobile detailing San Diego"
+         style="width:100%;height:100%;object-fit:cover;object-position:center 50%;filter:brightness(0.55)"
+         loading="lazy" decoding="async"/>
+    <div style="position:absolute;inset:0;background:linear-gradient(100deg,rgba(5,7,11,0.9) 0%,rgba(5,7,11,0.4) 50%,rgba(5,7,11,0.1) 100%)"></div>
+    <div style="position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;padding:0 72px 64px">
+      <div style="font-family:var(--cond);font-size:11px;font-weight:700;letter-spacing:5px;text-transform:uppercase;color:var(--accent);margin-bottom:16px;display:flex;align-items:center;gap:12px"><span style="display:inline-block;width:24px;height:1px;background:var(--accent)"></span>Watch Us Work</div>
+      <div style="font-family:var(--raleway);font-weight:900;font-size:clamp(3rem,6vw,6rem);line-height:.88;text-transform:uppercase;letter-spacing:-2px;color:#fff;margin-bottom:16px">Every Detail.<br><span style="background:linear-gradient(135deg,#a0aeb8 0%,#dde4ea 35%,#f0f4f6 52%,#dde4ea 68%,#a0aeb8 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">Done Right.</span></div>
+      <div style="font-family:var(--cond);font-size:12px;letter-spacing:4px;text-transform:uppercase;color:rgba(255,255,255,0.35)">Mobile Detailing &mdash; San Diego, CA</div>
     </div>
   </div>
+
 
   <!-- MAINTENANCE PLAN BAND -->
   <div class="plan-band">
@@ -1066,6 +1056,21 @@
   }
   window.addEventListener('scroll', updateFloat, {passive:true});
 
+  // Resume hero video after phone screen wake
+  (function(){
+    const hv = document.querySelector('.hero-vid-bg video');
+    if(!hv) return;
+    document.addEventListener('visibilitychange', function(){
+      if(document.visibilityState === 'visible'){
+        hv.play().catch(()=>{});
+      }
+    });
+    // Also resume on page focus
+    window.addEventListener('focus', function(){
+      hv.play().catch(()=>{});
+    }, {passive:true});
+  })();
+
   /* ══ PAGE ROUTING ══ */
   const PAGES = ['home','services','gallery','faq','contact'];
 
@@ -1200,22 +1205,6 @@
   document.getElementById('lb').addEventListener('click', e => { if(e.target===e.currentTarget) closeLb(); });
   document.addEventListener('keydown', e => { if(e.key==='Escape') closeLb(); if(e.key==='ArrowLeft') moveLb(-1); if(e.key==='ArrowRight') moveLb(1); });
 
-  /* ══ MID VIDEO — play only when visible ══ */
-  (function(){
-    const v = document.getElementById('midVid');
-    if(!v) return;
-    if('IntersectionObserver' in window){
-      const io = new IntersectionObserver(entries=>{
-        entries.forEach(e=>{
-          if(e.isIntersecting){ v.play().catch(()=>{}); }
-          else { v.pause(); }
-        });
-      },{threshold:0.25});
-      io.observe(v);
-    } else {
-      v.play().catch(()=>{});
-    }
-  })();
 
   /* ══ FAQ ══ */
   function toggleFaq(btn){
