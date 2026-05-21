@@ -12,6 +12,11 @@
   <meta property="og:url" content="https://aeroshinedetailing.com/"/>
   <meta property="og:title" content="Aeroshine Detailing | Mobile Auto Detailing San Diego"/>
   <meta property="og:description" content="Detail Obsessed. Quality Focused. Professional mobile detailing for San Diego — we come to you."/>
+  <meta property="og:image" content="https://aeroshinedetailing.com/Images/670290397_17880733929546364_1852680692895098668_n.jpg"/>
+  <meta property="og:image:width" content="1200"/>
+  <meta property="og:image:height" content="900"/>
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:image" content="https://aeroshinedetailing.com/Images/670290397_17880733929546364_1852680692895098668_n.jpg"/>
 
   <script>history.scrollRestoration="manual";</script>
   <script type="application/ld+json">
@@ -189,10 +194,11 @@
 
   /* ══ FAQ ══ */
     .faq-list{margin-top:52px;display:flex;flex-direction:column;gap:8px}
-    .faq-row{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius-sm);overflow:hidden;transition:border-color .2s}
-    .faq-row:hover{border-color:var(--line2)}
-    .faq-q{width:100%;text-align:left;padding:18px 22px;background:none;border:none;color:var(--text);font-family:var(--raleway);font-size:.95rem;font-weight:700;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:20px;text-transform:uppercase;letter-spacing:.5px}
+    .faq-row{background:linear-gradient(135deg,#131c28 0%,#0e1520 100%);border:1px solid rgba(200,212,220,0.1);border-left:2px solid rgba(200,212,220,0.25);border-radius:var(--radius-sm);overflow:hidden;transition:border-color .2s,background .2s}
+    .faq-row:hover{border-color:rgba(200,212,220,0.3);border-left-color:var(--accent);background:linear-gradient(135deg,#172030 0%,#121a26 100%)}
+    .faq-q{width:100%;text-align:left;padding:18px 22px;background:none;border:none;color:#e8edf2;font-family:var(--raleway);font-size:.95rem;font-weight:700;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:20px;text-transform:uppercase;letter-spacing:.5px}
     .faq-icon{width:22px;height:22px;border:1px solid var(--line2);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--accent);font-size:.9rem;transition:transform .25s;font-weight:300}
+    .faq-row.open{border-left-color:var(--accent);background:linear-gradient(135deg,#172030 0%,#121a26 100%)}
     .faq-row.open .faq-icon{transform:rotate(45deg)}
     .faq-a{max-height:0;overflow:hidden;transition:max-height .3s ease}
     .faq-row.open .faq-a{max-height:200px}
@@ -229,21 +235,21 @@
 
     /* ══ CONTACT ══ */
     .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:44px}
-    .contact-left{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:40px 36px}
+    .contact-left{background:linear-gradient(135deg,#131c28 0%,#0e1520 100%);border:1px solid rgba(200,212,220,0.15);border-radius:var(--radius);padding:40px 36px}
     .contact-left h2{font-family:var(--raleway);font-weight:900;font-size:clamp(1.8rem,3vw,2.8rem);text-transform:uppercase;letter-spacing:-1px;margin-bottom:14px;color:var(--text)}
     .contact-left>p{font-size:14px;color:var(--muted);line-height:1.75;margin-bottom:28px}
-    .contact-items{display:flex;flex-direction:column;gap:0;border-top:1px solid var(--line)}
-    .contact-item{display:flex;align-items:center;gap:20px;padding:16px 0;border-bottom:1px solid var(--line)}
-    .contact-item-label{font-family:var(--cond);font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--accent);width:80px;flex-shrink:0}
+    .contact-items{display:flex;flex-direction:column;gap:0;border-top:1px solid rgba(200,212,220,0.1)}
+    .contact-item{display:flex;align-items:center;gap:20px;padding:16px 0;border-bottom:1px solid rgba(200,212,220,0.1)}
+    .contact-item-label{font-family:var(--cond);font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--accent);width:80px;flex-shrink:0;opacity:1}
     .contact-item-val{font-family:var(--raleway);font-weight:700;font-size:.92rem;color:var(--text);font-variant-numeric:lining-nums tabular-nums;font-family:var(--cond);font-size:1rem;letter-spacing:1px}
-    .contact-right{background:var(--panel2);border:1px solid var(--line2);border-radius:var(--radius);padding:40px 36px}
+    .contact-right{background:linear-gradient(135deg,#0e1a28 0%,#0a1118 100%);border:1px solid rgba(200,212,220,0.2);border-radius:var(--radius);padding:40px 36px}
     .contact-right h3{font-family:var(--raleway);font-weight:900;font-size:1.4rem;text-transform:uppercase;letter-spacing:1px;color:var(--text);margin-bottom:6px}
     .contact-right>p{font-size:13px;color:var(--muted);margin-bottom:24px}
     .form-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px}
     .form-group{margin-bottom:10px}
     .form-group label{display:block;font-family:var(--cond);font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--muted);margin-bottom:7px}
-    .form-group input,.form-group select,.form-group textarea{width:100%;background:var(--bg);border:1px solid var(--line);border-radius:var(--radius-sm);padding:11px 14px;color:var(--text);font-family:var(--body);font-size:14px;outline:none;transition:border-color .2s}
-    .form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--accent)}
+    .form-group input,.form-group select,.form-group textarea{width:100%;background:#08101a;border:1px solid rgba(200,212,220,0.12);border-radius:var(--radius-sm);padding:11px 14px;color:var(--text);font-family:var(--body);font-size:14px;outline:none;transition:border-color .2s}
+    .form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--accent);background:#0c1520}
     .form-group textarea{resize:vertical;min-height:90px}
     .form-group select option{background:#111}
     .form-group input::placeholder,.form-group textarea::placeholder{color:rgba(255,255,255,0.2)}
@@ -371,8 +377,8 @@
   <!-- HERO VIDEO -->
   <section class="hero">
     <div class="hero-vid-bg">
-      <video autoplay muted loop playsinline preload="metadata">
-        <source src="Images/AQOl_9JTYX8fDPKh36YIvyxc9mFEHg1WWqbeth78_0krJ48mulAA_EN6dcZYK4MhiAG_OacNWGpdhsF-bkoigDU8nfPQ7vAp5G9zhWU.mp4" type="video/mp4"/>
+      <video autoplay muted loop playsinline preload="metadata" poster="Images/640443902_17871821481546364_6731067578379859367_n.jpg">
+        <source src="Images/video.mp4" type="video/mp4"/>
       </video>
     </div>
     <div class="hero-vid-overlay"></div>
@@ -423,7 +429,7 @@
       </div>
     </div>
     <div class="pillar">
-      <div class="pillar-bg"><img src="Images/659008535_17879243895546364_3806876001306811099_n.jpg" alt="Showroom finish mobile detailing San Diego" loading="lazy" style="object-position:center 43%"/></div>
+      <div class="pillar-bg"><img src="Images/643598841_17873282436546364_716638197750388634_n.jpg" alt="Showroom finish mobile detailing San Diego" loading="lazy" style="object-position:center 43%"/></div>
       <div class="pillar-overlay"></div>
       <div class="pillar-inner">
         <div class="pillar-tag">Showroom Finish</div>
@@ -598,7 +604,7 @@
 
       <!-- Services photo banner -->
       <div style="margin-top:40px;position:relative;height:320px;overflow:hidden;border-radius:18px">
-        <img src="Images/659008535_17879243895546364_3806876001306811099_n.jpg" alt="Aeroshine mobile detailing San Diego" style="width:100%;height:100%;object-fit:cover;object-position:center 60%;filter:brightness(0.8)"/>
+        <img src="Images/643598841_17873282436546364_716638197750388634_n.jpg" alt="Aeroshine mobile detailing San Diego" style="width:100%;height:100%;object-fit:cover;object-position:center 60%;filter:brightness(0.8)"/>
         <div style="position:absolute;inset:0;background:linear-gradient(90deg,rgba(5,7,11,0.85) 0%,rgba(5,7,11,0.2) 60%,transparent 100%);border-radius:18px"></div>
         <div style="position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;padding:48px">
           <div style="font-family:var(--cond);font-size:10px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:var(--accent);margin-bottom:12px">Mobile &mdash; We Come to You</div>
@@ -1157,7 +1163,6 @@
     '670290397_17880733929546364_1852680692895098668_n.jpg',
     '627238769_17869283283546364_6388904988225865135_n.jpg',
     '645724782_17873282427546364_837583315074889578_n.jpg',
-    '659008535_17879243895546364_3806876001306811099_n.jpg',
     '640065904_17871821472546364_5847883083169543772_n.jpg',
     '627970553_17869593813546364_6262229842299967007_n.jpg',
     '643598841_17873282436546364_716638197750388634_n.jpg',
@@ -1169,7 +1174,6 @@
     '670290397_17880733929546364_1852680692895098668_n.jpg':'Aeroshine mobile detailing San Diego',
     '627238769_17869283283546364_6388904988225865135_n.jpg':'Mercedes E-Class foam wash San Diego',
     '645724782_17873282427546364_837583315074889578_n.jpg':'Ford Ranger Raptor mobile detailing San Diego',
-    '659008535_17879243895546364_3806876001306811099_n.jpg':'Tesla Model Y full detail San Diego',
     '640065904_17871821472546364_5847883083169543772_n.jpg':'Red SUV foam wash mobile detailing San Diego',
     '627970553_17869593813546364_6262229842299967007_n.jpg':'SUV foam wash mobile detailing San Diego',
   };
