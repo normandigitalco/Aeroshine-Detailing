@@ -52,7 +52,7 @@
       --cond:'Barlow Condensed',sans-serif;
       --body:'Barlow',sans-serif;
     }
-    html{scroll-behavior:auto;overscroll-behavior-y:none}
+    html{scroll-behavior:auto}
     body{background:var(--bg);color:var(--text);font-family:var(--body);font-weight:300;line-height:1.6;overflow-x:hidden;background-image:radial-gradient(ellipse 80% 50% at 50% -10%,rgba(200,212,220,0.05) 0%,transparent 70%)}
     a,button,[onclick]{touch-action:manipulation;-webkit-tap-highlight-color:transparent}
     ::selection{background:var(--accent);color:#000}
@@ -62,7 +62,7 @@
 
     .page{display:none;opacity:0;width:100%;transition:none}
     .page.active{display:block}
-    .page.visible{opacity:1;transition:opacity .2s ease}
+    .page.visible{opacity:1;transition:opacity .2s ease;will-change:opacity}
 
     /* ══ NAV ══ */
     nav{position:fixed;top:0;left:0;right:0;z-index:1000;display:flex;align-items:center;justify-content:space-between;padding:0 56px;height:var(--nav-h);background:rgba(5,7,11,0.92);backdrop-filter:blur(16px);border-bottom:var(--border)}
@@ -89,11 +89,11 @@
     .mob-menu .mob-book{padding:14px 36px;background:var(--accent);color:#05070b;font-size:12px!important;border-radius:999px}
 
     /* ══ HERO VIDEO ══ */
-    .hero{position:relative;height:calc(var(--vh,1vh)*100 - var(--nav-h));min-height:calc(var(--vh,1vh)*100 - var(--nav-h));overflow:hidden;margin-top:var(--nav-h);background:#020406;display:flex;align-items:flex-end;contain:layout paint;isolation:isolate}
-    .hero-vid-bg{position:absolute;inset:0;z-index:1}
-    .hero-vid-bg video{width:100%;height:100%;object-fit:cover;object-position:center 35%;pointer-events:none}
-    .hero-vid-overlay{position:absolute;inset:0;z-index:2;background:linear-gradient(160deg,rgba(0,0,0,0.75) 0%,rgba(0,0,0,0.25) 50%,rgba(0,0,0,0.6) 100%)}
-    .hero-vid-overlay::after{content:'';position:absolute;bottom:0;left:0;right:0;height:200px;background:linear-gradient(to top,rgba(5,7,11,0.9) 0%,transparent 100%)}
+    .hero{position:relative;height:calc(var(--vh,1vh)*100 - var(--nav-h));min-height:calc(var(--vh,1vh)*100 - var(--nav-h));margin-top:var(--nav-h);display:flex;align-items:flex-end;}
+    .hero-vid-bg{position:fixed;top:0;left:0;right:0;bottom:0;z-index:-1}
+    .hero-vid-bg video{width:100%;height:100%;object-fit:cover;object-position:center 35%;pointer-events:none;will-change:transform}
+    .hero-vid-overlay{position:absolute;inset:0;z-index:2;background:linear-gradient(160deg,rgba(0,0,0,0.75) 0%,rgba(0,0,0,0.25) 50%,rgba(0,0,0,0.6) 100%,rgba(5,7,11,0.9) 100%)}
+    
     .hero-content{position:relative;z-index:10;padding:0 72px 88px;width:100%;max-width:900px}
     .hero-eyebrow{display:flex;align-items:center;gap:12px;margin-bottom:20px}
     .hero-eyebrow-bar{width:3px;height:18px;background:var(--accent);flex-shrink:0}
@@ -125,7 +125,7 @@
     @media(max-width:880px){}
 
     /* ══ PILLAR STRIP ══ */
-    .strip{display:grid;grid-template-columns:repeat(4,1fr);height:400px}
+    .strip{display:grid;grid-template-columns:repeat(4,1fr);height:400px;position:relative;z-index:1;background:var(--bg)}
     .pillar{position:relative;overflow:hidden}
     .pillar-bg{position:absolute;inset:0}
     .pillar-bg img{width:100%;height:100%;object-fit:cover;transition:transform .8s ease;filter:brightness(0.62)}
@@ -137,9 +137,9 @@
     .pillar-title{font-family:var(--raleway);font-weight:800;font-size:.95rem;letter-spacing:1px;color:#fff;text-transform:uppercase;line-height:1.25}
 
     /* ══ SECTIONS ══ */
-    .section{padding:96px 56px}
+    .section{padding:96px 56px;position:relative;z-index:1;background:var(--bg)}
     .section-inner{max-width:1180px;margin:auto}
-    .section-bg{background:var(--panel)}
+    .section-bg{background:var(--panel);position:relative;z-index:1}
     .eyebrow-tag{display:flex;align-items:center;gap:10px;margin-bottom:14px}
     .eyebrow-tag-bar{width:24px;height:1.5px;background:var(--accent);flex-shrink:0}
     .eyebrow-tag span{font-family:var(--cond);font-weight:700;font-size:10px;letter-spacing:4px;text-transform:uppercase;color:var(--accent)}
@@ -182,7 +182,7 @@
     .area-card span{font-family:var(--cond);font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--accent)}
 
     /* ══ MAINTENANCE PLAN BAND ══ */
-    .plan-band{background:var(--panel);border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:80px 56px}
+    .plan-band{background:var(--panel);border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:80px 56px;position:relative;z-index:1}
     .plan-inner{max-width:1180px;margin:auto;display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
     .plan-text h2{font-family:var(--raleway);font-weight:900;font-size:clamp(2rem,3.5vw,3rem);text-transform:uppercase;letter-spacing:-1px;margin-bottom:12px;color:var(--text)}
     .plan-text p{font-size:14px;color:var(--muted);line-height:1.8;margin-bottom:28px}
@@ -258,13 +258,13 @@
     .form-ok{display:none;color:#22c55e;font-size:13px;margin-top:12px;font-family:var(--cond);letter-spacing:2px;text-transform:uppercase}
 
     /* ══ CTA BAND ══ */
-    .cta-band{padding:80px 56px;background:linear-gradient(135deg,rgba(200,212,220,0.06),rgba(200,212,220,0.02));border-top:1px solid var(--line2);border-bottom:1px solid var(--line2);text-align:center}
+    .cta-band{padding:80px 56px;background:linear-gradient(135deg,rgba(200,212,220,0.06),rgba(200,212,220,0.02));border-top:1px solid var(--line2);border-bottom:1px solid var(--line2);text-align:center;position:relative;z-index:1;background-color:var(--bg)}
     .cta-band h2{font-family:var(--raleway);font-weight:900;font-size:clamp(2rem,4vw,3.5rem);color:var(--text);text-transform:uppercase;letter-spacing:-1px;margin-bottom:12px;line-height:.95}
     .cta-band p{font-family:var(--cond);font-size:13px;letter-spacing:3px;text-transform:uppercase;color:var(--muted);margin-bottom:32px}
     .cta-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
 
     /* ══ FOOTER ══ */
-    footer{background:var(--panel);border-top:var(--border)}
+    footer{background:var(--panel);border-top:var(--border);position:relative;z-index:1}
     .footer-top{padding:56px 56px 40px;max-width:1180px;margin:auto;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px}
     .footer-brand-name{font-family:var(--raleway);font-weight:900;font-size:1.1rem;text-transform:uppercase;letter-spacing:3px;color:var(--text);margin-bottom:6px}
     .footer-brand-name span{display:block;font-family:var(--cond);font-size:10px;letter-spacing:3px;color:var(--accent);font-weight:500;margin-top:3px}
@@ -496,7 +496,7 @@
   </section>
 
   <!-- WHY -->
-  <div class="why-section-wrap"><section class="section section-bg">
+  <div class="why-section-wrap" style="position:relative;z-index:1;background:var(--panel)"><section class="section section-bg">
     <div class="section-inner">
       <div class="eyebrow-tag"><div class="eyebrow-tag-bar"></div><span>Why Aeroshine</span></div>
       <h2 class="section-heading">Quality Focused</h2>
@@ -525,7 +525,7 @@
 
   </div><!-- /why-section-wrap -->
   <!-- PHOTO BAND — replaced video section for performance ──>
-  <div style="position:relative;height:520px;overflow:hidden">
+  <div style="position:relative;height:520px;overflow:hidden;z-index:1">
     <img src="Images/640443902_17871821481546364_6731067578379859367_n.jpg"
          alt="Aeroshine mobile detailing San Diego"
          style="width:100%;height:100%;object-fit:cover;object-position:center 50%;filter:brightness(0.55)"
@@ -1064,30 +1064,55 @@
   }
   window.addEventListener('scroll', updateFloat, {passive:true});
 
-  // Fix iOS bfcache restore — page restored from cache can have broken scroll/video state
+  // Fix iOS bfcache restore
   window.addEventListener('pageshow', function(e){
     if(e.persisted){
-      // Page restored from bfcache — reset scroll and resume video
       window.scrollTo(0,0);
-      const hv = document.querySelector('.hero-vid-bg video');
-      if(hv) hv.play().catch(()=>{});
       setVh();
     }
   });
 
-  // Resume hero video after phone screen wake
+  // Smart video controller — pause during scroll, resume when stopped
   (function(){
     const hv = document.querySelector('.hero-vid-bg video');
     if(!hv) return;
-    document.addEventListener('visibilitychange', function(){
-      if(document.visibilityState === 'visible'){
-        hv.play().catch(()=>{});
+
+    let scrollTimer = null;
+    let isScrolling = false;
+
+    function onScroll(){
+      // Only affect video when hero is visible (page is home)
+      if(_curPage && _curPage !== 'home') return;
+      
+      if(!isScrolling){
+        isScrolling = true;
+        // Freeze current video frame during scroll — no texture uploads
+        hv.style.willChange = 'auto';
       }
+      
+      clearTimeout(scrollTimer);
+      scrollTimer = setTimeout(function(){
+        isScrolling = false;
+        hv.style.willChange = 'transform';
+        // Resume video smoothly after scroll settles
+        hv.play().catch(()=>{});
+      }, 150);
+    }
+
+    window.addEventListener('scroll', onScroll, {passive:true});
+
+    // Resume on visibility/focus
+    document.addEventListener('visibilitychange', function(){
+      if(document.visibilityState === 'visible') hv.play().catch(()=>{});
     });
-    // Also resume on page focus
     window.addEventListener('focus', function(){
       hv.play().catch(()=>{});
     }, {passive:true});
+
+    // Resume on page wake
+    window.addEventListener('pageshow', function(e){
+      if(e.persisted) hv.play().catch(()=>{});
+    });
   })();
 
   /* ══ PAGE ROUTING ══ */
