@@ -52,7 +52,7 @@
       --cond:'Barlow Condensed',sans-serif;
       --body:'Barlow',sans-serif;
     }
-    html{scroll-behavior:auto}body{overscroll-behavior-y:none}
+    html{scroll-behavior:auto;overscroll-behavior-y:none}
     body{background:var(--bg);color:var(--text);font-family:var(--body);font-weight:300;line-height:1.6;overflow-x:hidden;background-image:radial-gradient(ellipse 80% 50% at 50% -10%,rgba(200,212,220,0.05) 0%,transparent 70%)}
     a,button,[onclick]{touch-action:manipulation;-webkit-tap-highlight-color:transparent}
     ::selection{background:var(--accent);color:#000}
@@ -65,7 +65,7 @@
     .page.visible{opacity:1;transition:opacity .2s ease}
 
     /* ══ NAV ══ */
-    nav{position:fixed;top:0;left:0;right:0;z-index:1000;transform:translateZ(0);-webkit-transform:translateZ(0);display:flex;align-items:center;justify-content:space-between;padding:0 56px;height:var(--nav-h);background:rgba(5,7,11,0.92);backdrop-filter:blur(16px);border-bottom:var(--border)}
+    nav{position:fixed;top:0;left:0;right:0;z-index:1000;display:flex;align-items:center;justify-content:space-between;padding:0 56px;height:var(--nav-h);background:rgba(5,7,11,0.92);backdrop-filter:blur(16px);border-bottom:var(--border)}
     .nav-brand{cursor:pointer;display:flex;flex-direction:column;line-height:1;gap:5px}
     .nav-brand-top{font-family:var(--raleway);font-weight:900;font-size:20px;letter-spacing:4px;color:var(--text);text-transform:uppercase}
     .nav-brand-sub{font-family:var(--cond);font-weight:500;font-size:10px;letter-spacing:5px;color:var(--accent);text-transform:uppercase}
@@ -82,7 +82,7 @@
     .ham.open span:nth-child(1){transform:rotate(45deg) translate(4.5px,4.5px)}
     .ham.open span:nth-child(2){opacity:0}
     .ham.open span:nth-child(3){transform:rotate(-45deg) translate(4.5px,-4.5px)}
-    .mob-menu{display:none;position:fixed;top:var(--nav-h);left:0;right:0;bottom:0;background:rgba(5,7,11,0.98);backdrop-filter:blur(20px);z-index:999;flex-direction:column;align-items:center;justify-content:center;gap:32px}
+    .mob-menu{display:none;position:fixed;top:var(--nav-h);left:0;right:0;bottom:0;background:rgba(5,7,11,0.98);z-index:999;flex-direction:column;align-items:center;justify-content:center;gap:32px}
     .mob-menu.open{display:flex}
     .mob-menu a{font-family:var(--raleway);font-size:20px;font-weight:800;letter-spacing:4px;text-transform:uppercase;color:var(--text);cursor:pointer;transition:color .2s}
     .mob-menu a:hover{color:var(--accent)}
@@ -90,8 +90,8 @@
 
     /* ══ HERO VIDEO ══ */
     .hero{position:relative;height:calc(var(--vh,1vh)*100 - var(--nav-h));min-height:calc(var(--vh,1vh)*100 - var(--nav-h));overflow:hidden;margin-top:var(--nav-h);background:#020406;display:flex;align-items:flex-end;contain:layout paint}
-    .hero-vid-bg{position:absolute;inset:0;z-index:1;transform:translateZ(0);-webkit-transform:translateZ(0)}
-    .hero-vid-bg video{width:100%;height:100%;object-fit:cover;object-position:center 35%;transform:translateZ(0);backface-visibility:hidden;-webkit-backface-visibility:hidden;pointer-events:none}
+    .hero-vid-bg{position:absolute;inset:0;z-index:1}
+    .hero-vid-bg video{width:100%;height:100%;object-fit:cover;object-position:center 35%;pointer-events:none}
     .hero-vid-overlay{position:absolute;inset:0;z-index:2;background:linear-gradient(160deg,rgba(0,0,0,0.75) 0%,rgba(0,0,0,0.25) 50%,rgba(0,0,0,0.6) 100%)}
     .hero-vid-overlay::after{content:'';position:absolute;bottom:0;left:0;right:0;height:200px;background:linear-gradient(to top,rgba(5,7,11,0.9) 0%,transparent 100%)}
     .hero-content{position:relative;z-index:10;padding:0 72px 88px;width:100%;max-width:900px}
