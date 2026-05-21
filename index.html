@@ -13,6 +13,7 @@
   <meta property="og:title" content="Aeroshine Detailing | Mobile Auto Detailing San Diego"/>
   <meta property="og:description" content="Detail Obsessed. Quality Focused. Professional mobile detailing for San Diego — we come to you."/>
 
+  <script>history.scrollRestoration="manual";</script>
   <script type="application/ld+json">
   {"@context":"https://schema.org","@type":"AutomotiveBusiness","name":"Aeroshine Detailing","description":"Premium mobile auto detailing in San Diego serving Cars, SUVs, Trucks, and RVs. Detail Obsessed. Quality Focused.","url":"https://aeroshinedetailing.com","telephone":"+16194047007","sameAs":["https://www.instagram.com/aeroshinedetailingllc/"],"areaServed":[{"@type":"City","name":"San Diego"},{"@type":"City","name":"Chula Vista"},{"@type":"City","name":"La Mesa"},{"@type":"City","name":"El Cajon"},{"@type":"City","name":"National City"},{"@type":"City","name":"Santee"}],"hasOfferCatalog":{"@type":"OfferCatalog","name":"Mobile Detailing Services","itemListElement":[{"@type":"Offer","itemOffered":{"@type":"Service","name":"Exterior Hand Wash & Detail"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Full Interior Detail"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Full Detail — Inside & Out"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Paint Decontamination & Sealant"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Maintenance Plans"}}]}}
   </script>
@@ -48,6 +49,7 @@
     }
     html{scroll-behavior:auto}
     body{background:var(--bg);color:var(--text);font-family:var(--body);font-weight:300;line-height:1.6;overflow-x:hidden;background-image:radial-gradient(ellipse 80% 50% at 50% -10%,rgba(200,212,220,0.05) 0%,transparent 70%)}
+    a,button,[onclick]{touch-action:manipulation;-webkit-tap-highlight-color:transparent}
     ::selection{background:var(--accent);color:#000}
     ::-webkit-scrollbar{width:3px}::-webkit-scrollbar-track{background:transparent}::-webkit-scrollbar-thumb{background:var(--accent);border-radius:4px}
     a{color:inherit;text-decoration:none}
@@ -82,7 +84,7 @@
     .mob-menu .mob-book{padding:14px 36px;background:var(--accent);color:#05070b;font-size:12px!important;border-radius:999px}
 
     /* ══ HERO VIDEO ══ */
-    .hero{position:relative;height:92svh;min-height:600px;overflow:hidden;margin-top:var(--nav-h);background:#020406;display:flex;align-items:flex-end}
+    .hero{position:relative;height:calc(var(--vh,1vh)*100 - var(--nav-h));min-height:560px;overflow:hidden;margin-top:var(--nav-h);background:#020406;display:flex;align-items:flex-end}
     .hero-vid-bg{position:absolute;inset:0;z-index:1}
     .hero-vid-bg video{width:100%;height:100%;object-fit:cover;object-position:center 35%}
     .hero-vid-overlay{position:absolute;inset:0;z-index:2;background:linear-gradient(160deg,rgba(0,0,0,0.75) 0%,rgba(0,0,0,0.25) 50%,rgba(0,0,0,0.6) 100%)}
@@ -115,8 +117,8 @@
 
     /* ══ VIDEO SECTION ══ */
     .vid-section{position:relative;height:610px;overflow:hidden;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#0a0f18 0%,#070c12 60%,#0c1018 100%)}
-    .vid-bg{position:absolute;inset:0;z-index:1}
-    .vid-bg video{width:100%;height:100%;object-fit:cover;object-position:center 60%}
+    .vid-bg{position:absolute;inset:0;z-index:1;will-change:transform}
+    .vid-bg video{width:100%;height:100%;object-fit:cover;object-position:center 60%;will-change:transform}
     .vid-overlay{position:absolute;inset:0;z-index:2;background:linear-gradient(100deg,rgba(5,7,11,0.88) 0%,rgba(5,7,11,0.5) 45%,rgba(5,7,11,0.2) 100%)}
     .vid-content{position:relative;z-index:3;padding:0 40px;max-width:760px;text-align:center}
     .vid-eyebrow{font-family:var(--cond);font-size:11px;font-weight:700;letter-spacing:5px;text-transform:uppercase;color:var(--accent);margin-bottom:20px;display:flex;align-items:center;justify-content:center;gap:12px}
@@ -323,6 +325,11 @@
       .footer-top{grid-template-columns:1fr}
     }
   </style>
+  <script>
+    function setVh(){document.documentElement.style.setProperty('--vh',window.innerHeight*0.01+'px');}
+    setVh();
+    window.addEventListener('resize',setVh,{passive:true});
+  </script>
 </head>
 <body>
 
@@ -1062,7 +1069,8 @@
   /* ══ PAGE ROUTING ══ */
   const PAGES = ['home','services','gallery','faq','contact'];
 
-  function showPage(id) {
+  let _curPage = null;
+  function showPage(id, fromPop) {
     if (!PAGES.includes(id)) id = 'home';
     PAGES.forEach(p => {
       const el = document.getElementById(p);
@@ -1070,26 +1078,43 @@
     });
     const next = document.getElementById(id);
     next.classList.add('active');
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        next.classList.add('visible');
-        window.scrollTo(0,0);
-      });
-    });
-    try { history.replaceState(null,'','#'+id); } catch(e) {}
+
+    // Triple scroll + flush then 4 frames
+    window.scrollTo(0,0);
+    void next.offsetHeight;
+    window.scrollTo(0,0);
+    requestAnimationFrame(()=>requestAnimationFrame(()=>requestAnimationFrame(()=>requestAnimationFrame(()=>{
+      window.scrollTo(0,0);
+      next.classList.add('visible');
+    }))));
+
+    if(!fromPop){
+      try {
+        if(id==='home') history.pushState({page:'home'},'',' ');
+        else if(id!==_curPage) history.pushState({page:id},'','#'+id);
+        else history.replaceState({page:id},'','#'+id);
+      } catch(e){}
+    }
+    _curPage = id;
     updateFloat();
-    if (id === 'gallery') buildGal();
+    if(id==='gallery') buildGal();
   }
 
   /* hash routing on load */
   (function(){
     const hash = location.hash.replace('#','');
-    if (PAGES.includes(hash)) showPage(hash);
-    else showPage('home');
-    // make home visible immediately
-    const home = document.getElementById('home');
-    if (home.classList.contains('active')) home.classList.add('visible');
+    const start = PAGES.includes(hash) ? hash : 'home';
+    try {
+      if(start==='home') history.replaceState({page:'home'},'',' ');
+      else history.replaceState({page:start},'','#'+start);
+    } catch(e){}
+    showPage(start, true);
   })();
+
+  window.addEventListener('popstate', function(e){
+    const id = (e.state&&e.state.page) || location.hash.replace('#','') || 'home';
+    showPage(PAGES.includes(id)?id:'home', true);
+  });
 
   function toggleMenu(){
     document.getElementById('ham').classList.toggle('open');
