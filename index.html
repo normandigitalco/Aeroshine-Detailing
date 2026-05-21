@@ -117,8 +117,8 @@
 
     /* ══ VIDEO SECTION ══ */
     .vid-section{position:relative;height:610px;overflow:hidden;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#0a0f18 0%,#070c12 60%,#0c1018 100%)}
-    .vid-bg{position:absolute;inset:0;z-index:1;will-change:transform}
-    .vid-bg video{width:100%;height:100%;object-fit:cover;object-position:center 60%;will-change:transform}
+    .vid-bg{position:absolute;inset:0;z-index:1}
+    .vid-bg video{width:100%;height:100%;object-fit:cover;object-position:center 60%;transform:translateZ(0);backface-visibility:hidden}
     .vid-overlay{position:absolute;inset:0;z-index:2;background:linear-gradient(100deg,rgba(5,7,11,0.88) 0%,rgba(5,7,11,0.5) 45%,rgba(5,7,11,0.2) 100%)}
     .vid-content{position:relative;z-index:3;padding:0 40px;max-width:760px;text-align:center}
     .vid-eyebrow{font-family:var(--cond);font-size:11px;font-weight:700;letter-spacing:5px;text-transform:uppercase;color:var(--accent);margin-bottom:20px;display:flex;align-items:center;justify-content:center;gap:12px}
@@ -196,7 +196,7 @@
     .plan-feat{display:flex;align-items:center;gap:14px;padding:13px 0;border-bottom:1px solid var(--line);font-size:13px;color:var(--muted)}
     .plan-feat::before{content:'';width:4px;height:4px;border-radius:50%;background:var(--accent);flex-shrink:0}
 
-    /* ══ FAQ ══ */
+  /* ══ FAQ ══ */
     .faq-list{margin-top:52px;display:flex;flex-direction:column;gap:8px}
     .faq-row{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius-sm);overflow:hidden;transition:border-color .2s}
     .faq-row:hover{border-color:var(--line2)}
@@ -346,7 +346,7 @@
     <a onclick="showPage('faq')">FAQ</a>
     <a onclick="showPage('contact')">Contact</a>
   </div>
-  <button class="nav-book" onclick="showPage('contact')">Book Now</button>
+  <button class="nav-book" onclick="showAndBook()">Book Now</button>
   <button class="ham" id="ham" onclick="toggleMenu()">
     <span></span><span></span><span></span>
   </button>
@@ -358,7 +358,7 @@
   <a onclick="showPage('gallery');toggleMenu()">Gallery</a>
   <a onclick="showPage('faq');toggleMenu()">FAQ</a>
   <a onclick="showPage('contact');toggleMenu()">Contact</a>
-  <a onclick="showPage('contact');toggleMenu()" class="mob-book">Book Now</a>
+  <a onclick="showAndBook();toggleMenu()" class="mob-book">Book Now</a>
 </div>
 
 <a href="tel:6194047007" class="float-btn" id="floatBtn">Call 619-404-7007</a>
@@ -529,7 +529,7 @@
   <!-- VIDEO SECTION -->
   <div class="vid-section">
     <div class="vid-bg">
-      <video autoplay muted loop playsinline preload="none">
+      <video muted loop playsinline preload="metadata" id="midVid">
         <source src="Images/VideoProject3.mp4" type="video/mp4"/>
       </video>
     </div>
@@ -941,7 +941,7 @@
           </div>
         </div>
 
-        <div class="contact-right">
+        <div class="contact-right" id="booking-form">
           <h3>Request a Quote</h3>
           <p>Fill out the form below and we'll reach out to confirm pricing and availability.</p>
           <form action="https://formsubmit.co/YOUR_EMAIL_HERE" method="POST" onsubmit="handleForm(event)">
@@ -1116,6 +1116,15 @@
     showPage(PAGES.includes(id)?id:'home', true);
   });
 
+  function showAndBook(){
+    showPage('contact');
+    // After page shows, scroll to the form
+    setTimeout(()=>{
+      const form = document.getElementById('booking-form');
+      if(form) form.scrollIntoView({behavior:'smooth', block:'start'});
+    }, 80);
+  }
+
   function toggleMenu(){
     document.getElementById('ham').classList.toggle('open');
     document.getElementById('mobMenu').classList.toggle('open');
@@ -1190,6 +1199,23 @@
   function moveLb(d){ lbCur=(lbCur+d+GALLERY.length)%GALLERY.length; document.getElementById('lbImg').src='Images/'+GALLERY[lbCur]; }
   document.getElementById('lb').addEventListener('click', e => { if(e.target===e.currentTarget) closeLb(); });
   document.addEventListener('keydown', e => { if(e.key==='Escape') closeLb(); if(e.key==='ArrowLeft') moveLb(-1); if(e.key==='ArrowRight') moveLb(1); });
+
+  /* ══ MID VIDEO — play only when visible ══ */
+  (function(){
+    const v = document.getElementById('midVid');
+    if(!v) return;
+    if('IntersectionObserver' in window){
+      const io = new IntersectionObserver(entries=>{
+        entries.forEach(e=>{
+          if(e.isIntersecting){ v.play().catch(()=>{}); }
+          else { v.pause(); }
+        });
+      },{threshold:0.25});
+      io.observe(v);
+    } else {
+      v.play().catch(()=>{});
+    }
+  })();
 
   /* ══ FAQ ══ */
   function toggleFaq(btn){
