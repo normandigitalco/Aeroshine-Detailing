@@ -10,8 +10,8 @@
   <link rel="canonical" href="https://aeroshinedetailing.com/"/>
   <meta property="og:type" content="website"/>
   <meta property="og:url" content="https://aeroshinedetailing.com/"/>
-  <meta property="og:title" content="Aeroshine Detailing | Mobile Auto Detailing San Diego"/>
-  <meta property="og:description" content="Detail Obsessed. Quality Focused. Professional mobile detailing for San Diego — we come to you."/>
+  <meta property="og:title" content="Aeroshine Detailing — Mobile Auto Detailing San Diego"/>
+  <meta property="og:description" content="Premium mobile detailing in San Diego. We come to you — cars, SUVs, trucks & RVs. Call or text 619-404-7007."/>
   <meta property="og:image" content="https://aeroshinedetailing.com/Images/670290397_17880733929546364_1852680692895098668_n.jpg"/>
   <meta property="og:image:width" content="1200"/>
   <meta property="og:image:height" content="900"/>
@@ -315,6 +315,11 @@
 
     /* ══ CONTACT LEFT GLOW ══ */
     .contact-left-glow{box-shadow:0 0 48px rgba(200,212,220,0.07),inset 0 1px 0 rgba(200,212,220,0.12)!important;border-color:rgba(200,212,220,0.22)!important}
+
+    /* ══ FAQ SECTION TIGHT ══ */
+    .section-faq{padding-top:48px}
+    .section-faq .faq-list{margin-top:28px}
+    @media(max-width:880px){.section-faq{padding-top:32px}.section-faq .faq-list{margin-top:20px}}
 
     /* ══ RESPONSIVE ══ */
     @media(max-width:880px){
@@ -891,11 +896,10 @@
     <img src="Images/627970553_17869593813546364_6262229842299967007_n.jpg" alt="Aeroshine mobile detailing San Diego" loading="lazy"/>
     <div class="page-strip-overlay"></div>
   </div>
-  <section class="section">
+  <section class="section section-faq">
     <div class="section-inner">
       <div class="eyebrow-tag" style="margin-top:8px"><div class="eyebrow-tag-bar"></div><span>Common Questions</span></div>
-      <h1 class="section-heading">FAQ</h1>
-      <p class="section-sub">Everything you need to know before booking your detail.</p>
+      <h1 class="section-heading" style="margin-bottom:0">FAQ</h1>
 
       <div class="faq-list">
 
@@ -1223,6 +1227,19 @@
     } else {
       hv.play().catch(()=>{});
     }
+    // Unlock autoplay on first touch — needed when page opens from iMessage/link
+    // iOS blocks autoplay until a user gesture, even with muted+playsinline
+    let _unlocked = false;
+    function _unlockVideo() {
+      if (_unlocked) return;
+      _unlocked = true;
+      hv.play().catch(() => {});
+      document.removeEventListener('touchend', _unlockVideo);
+      document.removeEventListener('touchstart', _unlockVideo);
+    }
+    document.addEventListener('touchend', _unlockVideo, { passive: true, once: true });
+    document.addEventListener('touchstart', _unlockVideo, { passive: true, once: true });
+
     document.addEventListener('visibilitychange',()=>{
       if(document.visibilityState==='visible') hv.play().catch(()=>{});
     });
