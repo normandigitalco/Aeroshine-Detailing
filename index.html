@@ -36,12 +36,12 @@
       --accent2:#e8edf2;
       --accent-glow:rgba(200,212,220,0.15);
       --bg:#05070b;
-      --panel:#0c1018;
-      --panel2:#101520;
+      --panel:#0f1520;
+      --panel2:#131d2a;
       --text:#f0f4f8;
-      --muted:#667788;
+      --muted:#8899aa;
       --silver:#c8d6e2;
-      --line:rgba(200,212,220,0.07);
+      --line:rgba(200,212,220,0.1);
       --line2:rgba(200,212,220,0.2);
       --border:1px solid rgba(255,255,255,0.07);
       --radius:18px;
@@ -53,7 +53,7 @@
       --body:'Barlow',sans-serif;
     }
     html{scroll-behavior:auto}
-    body{background:var(--bg);color:var(--text);font-family:var(--body);font-weight:300;line-height:1.6;overflow-x:hidden;background-image:radial-gradient(ellipse 80% 50% at 50% -10%,rgba(200,212,220,0.05) 0%,transparent 70%)}
+    body{background:var(--bg);color:var(--text);font-family:var(--body);font-weight:300;line-height:1.6;overflow-x:hidden;background-image:radial-gradient(ellipse 80% 50% at 50% -10%,rgba(200,212,220,0.07) 0%,transparent 70%)}
     a,button,[onclick]{touch-action:manipulation;-webkit-tap-highlight-color:transparent}
     ::selection{background:var(--accent);color:#000}
     ::-webkit-scrollbar{width:3px}::-webkit-scrollbar-track{background:transparent}::-webkit-scrollbar-thumb{background:var(--accent);border-radius:4px}
@@ -89,12 +89,11 @@
     .mob-menu .mob-book{padding:14px 36px;background:var(--accent);color:#05070b;font-size:12px!important;border-radius:999px}
 
     /* ══ HERO VIDEO ══ */
-    .hero{position:relative;height:calc(var(--vh,1vh)*100 - var(--nav-h));min-height:calc(var(--vh,1vh)*100 - var(--nav-h));margin-top:var(--nav-h);display:flex;align-items:flex-end;}
-    .hero-vid-bg{position:fixed;top:0;left:0;right:0;bottom:0;z-index:-1}
-    .hero-vid-bg video{width:100%;height:100%;object-fit:cover;object-position:center 35%;pointer-events:none;will-change:transform}
-    .hero-vid-overlay{position:absolute;inset:0;z-index:2;background:linear-gradient(160deg,rgba(0,0,0,0.75) 0%,rgba(0,0,0,0.25) 50%,rgba(0,0,0,0.6) 100%,rgba(5,7,11,0.9) 100%)}
+    .hero{position:relative;height:calc(var(--vh,1vh)*100 - var(--nav-h));min-height:calc(var(--vh,1vh)*100 - var(--nav-h));margin-top:var(--nav-h);display:flex;align-items:flex-end;overflow:hidden;background:#020406;contain:layout paint}
+    .hero-vid-bg{position:absolute;inset:0;z-index:1}
+    .hero-vid-bg video{width:100%;height:100%;object-fit:cover;object-position:center 35%;pointer-events:none}
+    .hero-vid-overlay{position:absolute;inset:0;z-index:2;background:linear-gradient(160deg,rgba(0,0,0,0.72) 0%,rgba(0,0,0,0.22) 50%,rgba(0,0,0,0.55) 100%)}
     
-    .hero-content{position:relative;z-index:10;padding:0 72px 88px;width:100%;max-width:900px}
     .hero-eyebrow{display:flex;align-items:center;gap:12px;margin-bottom:20px}
     .hero-eyebrow-bar{width:3px;height:18px;background:var(--accent);flex-shrink:0}
     .hero-eyebrow span{font-family:var(--cond);font-weight:600;font-size:11px;letter-spacing:5px;text-transform:uppercase;color:var(--accent)}
@@ -113,23 +112,30 @@
     .hero-scroll{position:absolute;bottom:32px;right:72px;z-index:10;display:flex;align-items:center;gap:10px;font-family:var(--cond);font-size:9px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:rgba(255,255,255,0.25)}
     .hero-scroll-line{width:40px;height:1px;background:rgba(255,255,255,0.2)}
     @media(max-width:880px){
-      .hero-content{padding:0 24px 64px}
-      .hero-vid-bg video{object-position:center 30%}
       .hero{height:calc(var(--vh,1vh)*100 - var(--nav-h));min-height:calc(var(--vh,1vh)*100 - var(--nav-h))}
       .hero-title{font-size:clamp(44px,12vw,80px);letter-spacing:-2px}
       .hero-scroll{display:none}
     }
 
 
-    /* ══ VIDEO SECTION ══ */
-    @media(max-width:880px){}
+    /* ══ VIDEO BAND ══ */
+    .vid-band{position:relative;height:80vh;min-height:500px;overflow:hidden}
+    .vid-band-overlay{position:absolute;inset:0;background:rgba(0,0,0,0.45)}
+    .vid-band-content{position:absolute;bottom:0;left:0;right:0;z-index:10;padding:0 72px 72px}
+    @media(max-width:880px){
+      .vid-band{height:70vh}
+      .vid-band-content{padding:0 24px 56px}
+    }
+
+    .hero-content{position:absolute;bottom:0;left:0;right:0;z-index:10;padding:0 72px 88px;max-width:900px}
+    @media(max-width:880px){.hero-content{padding:0 24px 64px}}
 
     /* ══ PILLAR STRIP ══ */
     .strip{display:grid;grid-template-columns:repeat(4,1fr);height:400px;position:relative;z-index:1;background:var(--bg)}
     .pillar{position:relative;overflow:hidden}
     .pillar-bg{position:absolute;inset:0}
-    .pillar-bg img{width:100%;height:100%;object-fit:cover;transition:transform .8s ease;filter:brightness(0.62)}
-    .pillar:hover .pillar-bg img{transform:scale(1.07);filter:brightness(0.78)}
+    .pillar-bg img{width:100%;height:100%;object-fit:cover;transition:transform .8s ease;filter:brightness(0.68)}
+    .pillar:hover .pillar-bg img{transform:scale(1.07);filter:brightness(0.82)}
     .pillar-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.85) 0%,rgba(0,0,0,0.1) 60%,transparent 100%)}
     .pillar-inner{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;padding:28px 24px;z-index:2}
     .pillar-tag{font-family:var(--raleway);font-size:10px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:var(--accent);margin-bottom:8px;display:flex;align-items:center;gap:8px}
@@ -139,16 +145,16 @@
     /* ══ SECTIONS ══ */
     .section{padding:96px 56px;position:relative;z-index:1;background:var(--bg)}
     .section-inner{max-width:1180px;margin:auto}
-    .section-bg{background:var(--panel);position:relative;z-index:1}
+    .section-bg{background:linear-gradient(135deg,#111d2c 0%,#0d1520 100%);position:relative;z-index:1}
     .eyebrow-tag{display:flex;align-items:center;gap:10px;margin-bottom:14px}
     .eyebrow-tag-bar{width:24px;height:1.5px;background:var(--accent);flex-shrink:0}
     .eyebrow-tag span{font-family:var(--cond);font-weight:700;font-size:10px;letter-spacing:4px;text-transform:uppercase;color:var(--accent)}
     .section-heading{font-family:var(--raleway);font-weight:900;font-size:clamp(2.2rem,4.5vw,3.8rem);line-height:.95;text-transform:uppercase;letter-spacing:-1px;margin-bottom:20px;color:var(--text)}
-    .section-sub{font-family:var(--body);font-size:15px;color:var(--muted);max-width:520px;line-height:1.75}
+    .section-sub{font-family:var(--body);font-size:15px;color:#9aaabb;max-width:520px;line-height:1.75}
 
     /* ══ SERVICES ══ */
     .services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:52px}
-    .svc-card{background:linear-gradient(135deg,#131c28 0%,#0e1520 100%);border:1px solid rgba(200,212,220,0.12);border-radius:var(--radius);padding:36px 32px;position:relative;transition:background .25s,border-color .25s}
+    .svc-card{background:linear-gradient(135deg,#162030 0%,#111a26 100%);border:1px solid rgba(200,212,220,0.12);border-radius:var(--radius);padding:36px 32px;position:relative;transition:background .25s,border-color .25s}
     .svc-card:hover{background:linear-gradient(135deg,#172030 0%,#121a26 100%);border-color:rgba(200,212,220,0.3)}
     .svc-card h3{font-family:var(--raleway);font-weight:800;font-size:1.25rem;text-transform:uppercase;letter-spacing:1px;margin-bottom:14px;color:#fff}
     .svc-card p{font-size:14px;color:#8fa0b4;line-height:1.75;margin-bottom:20px}
@@ -168,7 +174,7 @@
 
     /* ══ WHY ══ */
     .why-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:52px}
-    .why-card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:32px 28px;transition:border-color .25s}
+    .why-card{background:linear-gradient(135deg,#162030 0%,#111a26 100%);border:1px solid rgba(200,212,220,0.1);border-radius:var(--radius);padding:32px 28px;transition:border-color .25s}
     .why-card:hover{border-color:var(--line2)}
     .why-card h3{font-family:var(--raleway);font-weight:800;font-size:1rem;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:10px;color:var(--text)}
     .why-card p{font-size:13px;color:var(--muted);line-height:1.75}
@@ -375,9 +381,10 @@
 <div class="page active" id="home">
 
   <!-- HERO VIDEO -->
-  <section class="hero">
+  <section class="hero" id="heroSection">
     <div class="hero-vid-bg">
-      <video autoplay muted loop playsinline preload="metadata" poster="Images/640443902_17871821481546364_6731067578379859367_n.jpg">
+      <video id="heroVid" muted loop playsinline preload="metadata"
+             poster="Images/640443902_17871821481546364_6731067578379859367_n.jpg">
         <source src="Images/video.mp4" type="video/mp4; codecs=hevc"/>
         <source src="Images/video-h264.mp4" type="video/mp4; codecs=avc1"/>
       </video>
@@ -397,10 +404,7 @@
       </div>
     </div>
 
-    <div class="hero-scroll">
-      <div class="hero-scroll-line"></div>
-      Scroll
-    </div>
+
   </section>
 
   <!-- PILLAR STRIP -->
@@ -496,7 +500,7 @@
   </section>
 
   <!-- WHY -->
-  <div class="why-section-wrap" style="position:relative;z-index:1;background:var(--panel)"><section class="section section-bg">
+  <div class="why-section-wrap" style="position:relative;z-index:1;background:linear-gradient(135deg,#111d2c 0%,#0d1520 100%)"><section class="section section-bg">
     <div class="section-inner">
       <div class="eyebrow-tag"><div class="eyebrow-tag-bar"></div><span>Why Aeroshine</span></div>
       <h2 class="section-heading">Quality Focused</h2>
@@ -524,14 +528,15 @@
 
 
   </div><!-- /why-section-wrap -->
-  <!-- PHOTO BAND — replaced video section for performance ──>
-  <div style="position:relative;height:520px;overflow:hidden;z-index:1">
-    <img src="Images/640443902_17871821481546364_6731067578379859367_n.jpg"
+  <!-- VIDEO BAND -->
+  <!-- PHOTO BAND -->
+  <div class="vid-band">
+    <img src="Images/670290397_17880733929546364_1852680692895098668_n.jpg"
          alt="Aeroshine mobile detailing San Diego"
-         style="width:100%;height:100%;object-fit:cover;object-position:center 50%;filter:brightness(0.55)"
+         style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 52%;filter:brightness(0.75)"
          loading="lazy" decoding="async"/>
-    <div style="position:absolute;inset:0;background:linear-gradient(100deg,rgba(5,7,11,0.9) 0%,rgba(5,7,11,0.4) 50%,rgba(5,7,11,0.1) 100%)"></div>
-    <div style="position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;padding:0 72px 64px">
+    <div class="vid-band-overlay"></div>
+    <div class="vid-band-content">
       <div style="font-family:var(--cond);font-size:11px;font-weight:700;letter-spacing:5px;text-transform:uppercase;color:var(--accent);margin-bottom:16px;display:flex;align-items:center;gap:12px"><span style="display:inline-block;width:24px;height:1px;background:var(--accent)"></span>Watch Us Work</div>
       <div style="font-family:var(--raleway);font-weight:900;font-size:clamp(3rem,6vw,6rem);line-height:.88;text-transform:uppercase;letter-spacing:-2px;color:#fff;margin-bottom:16px">Every Detail.<br><span style="background:linear-gradient(135deg,#a0aeb8 0%,#dde4ea 35%,#f0f4f6 52%,#dde4ea 68%,#a0aeb8 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">Done Right.</span></div>
       <div style="font-family:var(--cond);font-size:12px;letter-spacing:4px;text-transform:uppercase;color:rgba(255,255,255,0.35)">Mobile Detailing &mdash; San Diego, CA</div>
@@ -605,7 +610,7 @@
 
       <!-- Services photo banner -->
       <div style="margin-top:40px;position:relative;height:320px;overflow:hidden;border-radius:18px">
-        <img src="Images/627238769_17869283283546364_6388904988225865135_n.jpg" alt="Aeroshine mobile detailing San Diego" style="width:100%;height:100%;object-fit:cover;object-position:center 60%;filter:brightness(0.8)"/>
+        <img src="Images/627238769_17869283283546364_6388904988225865135_n.jpg" alt="Aeroshine mobile detailing San Diego" style="width:100%;height:100%;object-fit:cover;object-position:center 60%;filter:brightness(1)"/>
         <div style="position:absolute;inset:0;background:linear-gradient(90deg,rgba(5,7,11,0.85) 0%,rgba(5,7,11,0.2) 60%,transparent 100%);border-radius:18px"></div>
         <div style="position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;padding:48px">
           <div style="font-family:var(--cond);font-size:10px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:var(--accent);margin-bottom:12px">Mobile &mdash; We Come to You</div>
@@ -1072,48 +1077,7 @@
     }
   });
 
-  // Smart video controller — pause during scroll, resume when stopped
-  (function(){
-    const hv = document.querySelector('.hero-vid-bg video');
-    if(!hv) return;
 
-    let scrollTimer = null;
-    let isScrolling = false;
-
-    function onScroll(){
-      // Only affect video when hero is visible (page is home)
-      if(_curPage && _curPage !== 'home') return;
-      
-      if(!isScrolling){
-        isScrolling = true;
-        // Freeze current video frame during scroll — no texture uploads
-        hv.style.willChange = 'auto';
-      }
-      
-      clearTimeout(scrollTimer);
-      scrollTimer = setTimeout(function(){
-        isScrolling = false;
-        hv.style.willChange = 'transform';
-        // Resume video smoothly after scroll settles
-        hv.play().catch(()=>{});
-      }, 150);
-    }
-
-    window.addEventListener('scroll', onScroll, {passive:true});
-
-    // Resume on visibility/focus
-    document.addEventListener('visibilitychange', function(){
-      if(document.visibilityState === 'visible') hv.play().catch(()=>{});
-    });
-    window.addEventListener('focus', function(){
-      hv.play().catch(()=>{});
-    }, {passive:true});
-
-    // Resume on page wake
-    window.addEventListener('pageshow', function(e){
-      if(e.persisted) hv.play().catch(()=>{});
-    });
-  })();
 
   /* ══ PAGE ROUTING ══ */
   if('scrollRestoration' in history) history.scrollRestoration = 'manual';
@@ -1181,7 +1145,31 @@
     document.body.style.overflow = document.getElementById('mobMenu').classList.contains('open') ? 'hidden' : '';
   }
 
-  /* ══ SLIDER REMOVED — video hero ══ */
+  /* ══ HERO VIDEO — IO controlled ══ */
+  (function(){
+    const hv = document.getElementById('heroVid');
+    if(!hv) return;
+    if('IntersectionObserver' in window){
+      const io = new IntersectionObserver(entries=>{
+        entries.forEach(e=>{
+          if(e.isIntersecting) hv.play().catch(()=>{});
+          else hv.pause();
+        });
+      },{threshold:0.1});
+      io.observe(hv);
+    } else {
+      hv.play().catch(()=>{});
+    }
+    document.addEventListener('visibilitychange',()=>{
+      if(document.visibilityState==='visible') hv.play().catch(()=>{});
+    });
+    window.addEventListener('focus',()=>hv.play().catch(()=>{}),{passive:true});
+    window.addEventListener('pageshow',e=>{
+      if(e.persisted){ window.scrollTo(0,0); setVh(); hv.play().catch(()=>{}); }
+    });
+  })();
+
+
 
   /* ══ GALLERY ══ */
   const GALLERY = [
